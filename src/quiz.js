@@ -40,4 +40,27 @@ class Quiz {
         }
 
     }
+
+    filterQuestionsByDifficulty(difficulty){
+
+          if (typeof difficulty !== "number" || difficulty < 1 || difficulty > 3) {
+             return;
+                }
+
+            this.questions = this.questions.filter(
+                question => question.difficulty === difficulty
+            );
+                }
+
+
+    averageDifficulty(){
+
+        const sum = this.questions.reduce((acc, question) =>{
+            return acc + question.difficulty;
+
+        },0);
+        return sum/ this.questions.length
+            
+    }
+     
 }
