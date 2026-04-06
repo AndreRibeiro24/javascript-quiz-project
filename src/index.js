@@ -185,24 +185,25 @@ RestarButtonElement.addEventListener('click', ()=>{
   quiz.shuffleQuestions();
   quiz.getQuestion(quiz.currentQuestionIndex);
 
-
+  quizDuration = 120;
+  const minutes = Math.floor(quiz.timeRemaining / 60).toString().padStart(2, "0");
+  const seconds = (quiz.timeRemaining % 60).toString().padStart(2, "0");
+  timeRemainingContainer.innerHTML = `${minutes}:${seconds}`
 })
-//add timer
-//  const interval = setInterval(() => {
-//   if (quiz.timeRemaining <= 0){
-//     clearInterval(interval);
-//     showResults();
-//     return;
-//   }
-//   quiz.timeRemaining--;
-  
-//   const minutes = Math.floor(quiz.timeRemaining / 60).toString().padStart(2, "0");
-//   const seconds = (quiz.timeRemaining % 60).toString().padStart(2, "0");
-//   timeRemainingContainer.innerText = `Remaining time: ${minutes}:${seconds}`;
-//  }, 1000);
-  
+//Timer building 
 
-
+const timerInterval = setInterval(() => {
+  if(quiz.timeRemaining <= 0){
+    clearInterval(timerInterval);
+    showResults();
+    return;
+  }
+  quiz.timeRemaining--;
+  const minutes = Math.floor(quiz.timeRemaining / 60).toString().padStart(2, "0");
+  const seconds = (quiz.timeRemaining % 60).toString().padStart(2, "0");
+  timeRemainingContainer.innerHTML = `${minutes}:${seconds}`
+  
+}, 1000);
 /*end of line*/});
 
 
