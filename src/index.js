@@ -184,12 +184,9 @@ RestarButtonElement.addEventListener('click', ()=>{
   questionCount.innerText =`${currentQuest} out of ${quiz.questions.length}`;
   quiz.shuffleQuestions();
   quiz.getQuestion(quiz.currentQuestionIndex);
-
-  quizDuration = 120;
-  const minutes = Math.floor(quiz.timeRemaining / 60).toString().padStart(2, "0");
-  const seconds = (quiz.timeRemaining % 60).toString().padStart(2, "0");
-  timeRemainingContainer.innerHTML = `${minutes}:${seconds}`
-})
+// ONLY THING REMAINING, to RESTART TIMER WHEN QUIZ IS RESTARTED 
+  //quiz.timeRemaining = timerInterval;
+ })
 //Timer building 
 
 const timerInterval = setInterval(() => {
