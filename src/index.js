@@ -186,10 +186,11 @@ RestarButtonElement.addEventListener('click', ()=>{
   quiz.getQuestion(quiz.currentQuestionIndex);
 // ONLY THING REMAINING, to RESTART TIMER WHEN QUIZ IS RESTARTED 
   //quiz.timeRemaining = timerInterval;
+  startTimer();
  })
 //Timer building 
 
-const timerInterval = setInterval(() => {
+let timerInterval = setInterval(() => {
   if(quiz.timeRemaining <= 0){
     clearInterval(timerInterval);
     showResults();
@@ -201,6 +202,26 @@ const timerInterval = setInterval(() => {
   timeRemainingContainer.innerHTML = `${minutes}:${seconds}`
   
 }, 1000);
+//Reseting the timer
+const INITIAL_TIME = quiz.timeRemaining; 
+let timerRestart = null; 
+
+function startTimer() {
+  // clear any existing timer ----- Ask Daniel why is it dropping seconds quickly ---------------//
+  quiz.timeRemaining = quizDuration; // reset time
+
+  timerRestart = setInterval(() => {
+    if (quiz.timeRemaining <= 0) {
+      clearInterval(timerRestart);
+      showResults();
+      return;
+    }
+    quiz.timeRemaining--;
+    const minutes = Math.floor(quiz.timeRemaining / 60).toString().padStart(2, "0");
+    const seconds = (quiz.timeRemaining % 60).toString().padStart(2, "0");
+    timeRemainingContainer.innerHTML = `${minutes}:${seconds}`;
+  }, 1000);
+}
 /*end of line*/});
 
 
